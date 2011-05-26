@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SlidingTableCell.h"
 
-@interface SlidingTableCellViewController : UIViewController {
-    
+@interface SlidingTableCellViewController : UITableViewController <SlidingTableCellDelegate> {
+  SlidingTableCell *currentlyActiveSlidingCell;
 }
-
+@property (nonatomic, retain) SlidingTableCell *currentlyActiveSlidingCell;
 @end

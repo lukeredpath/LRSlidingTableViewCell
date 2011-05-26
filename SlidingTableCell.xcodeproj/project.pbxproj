@@ -16,6 +16,7 @@
 		A3D9A34A138EA2D100AFBA90 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D9A348138EA2D100AFBA90 /* MainWindow.xib */; };
 		A3D9A34D138EA2D100AFBA90 /* SlidingTableCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D9A34C138EA2D100AFBA90 /* SlidingTableCellViewController.m */; };
 		A3D9A350138EA2D100AFBA90 /* SlidingTableCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D9A34E138EA2D100AFBA90 /* SlidingTableCellViewController.xib */; };
+		A3D9A358138EA40900AFBA90 /* SlidingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D9A357138EA40900AFBA90 /* SlidingTableCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,16 +24,18 @@
 		A3D9A336138EA2D100AFBA90 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A3D9A338138EA2D100AFBA90 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A3D9A33A138EA2D100AFBA90 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		A3D9A33E138EA2D100AFBA90 /* SlidingTableCell-Info.plist */ = {isa = PBXFileReference; path = "SlidingTableCell-Info.plist"; sourceTree = "<group>"; };
+		A3D9A33E138EA2D100AFBA90 /* SlidingTableCell-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SlidingTableCell-Info.plist"; sourceTree = "<group>"; };
 		A3D9A340138EA2D100AFBA90 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A3D9A342138EA2D100AFBA90 /* SlidingTableCell-Prefix.pch */ = {isa = PBXFileReference; path = "SlidingTableCell-Prefix.pch"; sourceTree = "<group>"; };
+		A3D9A342138EA2D100AFBA90 /* SlidingTableCell-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SlidingTableCell-Prefix.pch"; sourceTree = "<group>"; };
 		A3D9A343138EA2D100AFBA90 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A3D9A345138EA2D100AFBA90 /* SlidingTableCellAppDelegate.h */ = {isa = PBXFileReference; path = SlidingTableCellAppDelegate.h; sourceTree = "<group>"; };
+		A3D9A345138EA2D100AFBA90 /* SlidingTableCellAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidingTableCellAppDelegate.h; sourceTree = "<group>"; };
 		A3D9A346138EA2D100AFBA90 /* SlidingTableCellAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlidingTableCellAppDelegate.m; sourceTree = "<group>"; };
 		A3D9A349138EA2D100AFBA90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		A3D9A34B138EA2D100AFBA90 /* SlidingTableCellViewController.h */ = {isa = PBXFileReference; path = SlidingTableCellViewController.h; sourceTree = "<group>"; };
+		A3D9A34B138EA2D100AFBA90 /* SlidingTableCellViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidingTableCellViewController.h; sourceTree = "<group>"; };
 		A3D9A34C138EA2D100AFBA90 /* SlidingTableCellViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlidingTableCellViewController.m; sourceTree = "<group>"; };
 		A3D9A34F138EA2D100AFBA90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SlidingTableCellViewController.xib; sourceTree = "<group>"; };
+		A3D9A356138EA40900AFBA90 /* SlidingTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingTableCell.h; sourceTree = "<group>"; };
+		A3D9A357138EA40900AFBA90 /* SlidingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingTableCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				A3D9A34C138EA2D100AFBA90 /* SlidingTableCellViewController.m */,
 				A3D9A34E138EA2D100AFBA90 /* SlidingTableCellViewController.xib */,
 				A3D9A33D138EA2D100AFBA90 /* Supporting Files */,
+				A3D9A356138EA40900AFBA90 /* SlidingTableCell.h */,
+				A3D9A357138EA40900AFBA90 /* SlidingTableCell.m */,
 			);
 			path = SlidingTableCell;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 				A3D9A344138EA2D100AFBA90 /* main.m in Sources */,
 				A3D9A347138EA2D100AFBA90 /* SlidingTableCellAppDelegate.m in Sources */,
 				A3D9A34D138EA2D100AFBA90 /* SlidingTableCellViewController.m in Sources */,
+				A3D9A358138EA40900AFBA90 /* SlidingTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

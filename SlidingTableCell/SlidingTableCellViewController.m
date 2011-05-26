@@ -10,8 +10,11 @@
 
 @implementation SlidingTableCellViewController
 
+@synthesize currentlyActiveSlidingCell;
+
 - (void)dealloc
 {
+  [currentlyActiveSlidingCell release];
     [super dealloc];
 }
 
@@ -25,13 +28,10 @@
 
 #pragma mark - View lifecycle
 
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 }
-*/
 
 - (void)viewDidUnload
 {
@@ -44,6 +44,53 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark -
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return 60.0;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  return 30;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  static NSString *identifier = @"CELL_IDENTIFIER";
+  
+  SlidingTableCell *cell = (SlidingTableCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+  
+  if (cell == nil) {
+    cell = [[[SlidingTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+  }
+  
+  cell.selectionStyle = UITableViewCellSelectionStyleNone;
+  cell.contentView.backgroundColor = [UIColor whiteColor];
+  cell.textLabel.text = [NSString stringWithFormat:@"Cell %d", indexPath.row];
+  cell.delegate = self;
+  
+  return cell;
+}
+
+- (void)cellDidReceiveSwipe:(SlidingTableCell *)cell
+{
+  self.currentlyActiveSlidingCell = cell;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+  self.currentlyActiveSlidingCell = nil;
+}
+
+- (void)setCurrentlyActiveSlidingCell:(SlidingTableCell *)cell
+{
+  [currentlyActiveSlidingCell slideInContentView];
+  [currentlyActiveSlidingCell autorelease];
+  currentlyActiveSlidingCell = [cell retain];
 }
 
 @end
