@@ -15,35 +15,7 @@
 - (void)dealloc
 {
   [currentlyActiveSlidingCell release];
-    [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  [super dealloc];
 }
 
 #pragma mark -
@@ -62,10 +34,10 @@
 {
   static NSString *identifier = @"CELL_IDENTIFIER";
   
-  LRSlidingTableCell *cell = (LRSlidingTableCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+  LRSlidingTableViewCell *cell = (LRSlidingTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
   
   if (cell == nil) {
-    cell = [[[LRSlidingTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+    cell = [[[LRSlidingTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
   }
   
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -76,17 +48,25 @@
   return cell;
 }
 
-- (void)cellDidReceiveSwipe:(LRSlidingTableCell *)cell
+/** Store a reference to the cell that has been swiped.
+ *
+ *  This allows us to slide the cell's content back in again if the user
+ *  starts dragging the table view or swipes a different cell. 
+ */
+- (void)cellDidReceiveSwipe:(LRSlidingTableViewCell *)cell
 {
   self.currentlyActiveSlidingCell = cell;
 }
 
+/** Any swiped cell should be reset when we start to scroll. */
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
   self.currentlyActiveSlidingCell = nil;
 }
 
-- (void)setCurrentlyActiveSlidingCell:(LRSlidingTableCell *)cell
+/** Whenever the current active sliding cell changes (or is set to nil)
+  * the existing one should be reset by calling it's slideInContentView method. */
+- (void)setCurrentlyActiveSlidingCell:(LRSlidingTableViewCell *)cell
 {
   [currentlyActiveSlidingCell slideInContentView];
   [currentlyActiveSlidingCell autorelease];

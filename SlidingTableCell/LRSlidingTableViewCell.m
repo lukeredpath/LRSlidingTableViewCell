@@ -6,10 +6,10 @@
 //  Copyright 2011 LJR Software Limited. All rights reserved.
 //
 
-#import "LRSlidingTableCell.h"
+#import "LRSlidingTableViewCell.h"
 
 
-@implementation LRSlidingTableCell
+@implementation LRSlidingTableViewCell
 
 @synthesize delegate;
 
@@ -30,15 +30,6 @@
   
   return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 - (void)dealloc
 {
