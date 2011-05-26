@@ -2,6 +2,8 @@
 
 This is a simple implementation of the "swipe to reveal" behaviour found in Twitter and Spotify for iPhone.
 
+It uses modern iOS techniques (animations using blocks) and so requires iOS 4.0 or greater.
+
 The basic premise is that by swiping over a table view cell, the content view is shifted to reveal a background view (which the developer should provide themselves).
 
 When the table view is scrolled, any swiped cell will close. A subtle "bounce" effect is added when the content view slides back in.
