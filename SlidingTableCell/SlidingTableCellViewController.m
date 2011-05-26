@@ -62,10 +62,10 @@
 {
   static NSString *identifier = @"CELL_IDENTIFIER";
   
-  SlidingTableCell *cell = (SlidingTableCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+  LRSlidingTableCell *cell = (LRSlidingTableCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
   
   if (cell == nil) {
-    cell = [[[SlidingTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+    cell = [[[LRSlidingTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
   }
   
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -76,7 +76,7 @@
   return cell;
 }
 
-- (void)cellDidReceiveSwipe:(SlidingTableCell *)cell
+- (void)cellDidReceiveSwipe:(LRSlidingTableCell *)cell
 {
   self.currentlyActiveSlidingCell = cell;
 }
@@ -86,7 +86,7 @@
   self.currentlyActiveSlidingCell = nil;
 }
 
-- (void)setCurrentlyActiveSlidingCell:(SlidingTableCell *)cell
+- (void)setCurrentlyActiveSlidingCell:(LRSlidingTableCell *)cell
 {
   [currentlyActiveSlidingCell slideInContentView];
   [currentlyActiveSlidingCell autorelease];

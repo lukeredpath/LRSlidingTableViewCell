@@ -6,10 +6,10 @@
 //  Copyright 2011 LJR Software Limited. All rights reserved.
 //
 
-#import "SlidingTableCell.h"
+#import "LRSlidingTableCell.h"
 
 
-@implementation SlidingTableCell
+@implementation LRSlidingTableCell
 
 @synthesize delegate;
 
