@@ -10,6 +10,13 @@
 
 @class LRSlidingTableViewCell;
 
+typedef enum {
+  LRSlidingTableViewCellSwipeDirectionRight = 0,
+  LRSlidingTableViewCellSwipeDirectionLeft,
+  LRSlidingTableViewCellSwipeDirectionBoth,
+  LRSlidingTableViewCellSwipeDirectionNone,
+} LRSlidingTableViewCellSwipeDirection;
+
 @protocol LRSlidingTableViewCellDelegate <NSObject>
 - (void)cellDidReceiveSwipe:(LRSlidingTableViewCell *)cell;
 @end
@@ -18,6 +25,8 @@
   id <LRSlidingTableViewCellDelegate> delegate;
 }
 @property (nonatomic, assign) id <LRSlidingTableViewCellDelegate> delegate;
+@property (nonatomic, assign) LRSlidingTableViewCellSwipeDirection swipeDirection;
+@property (nonatomic, retain) UISwipeGestureRecognizer *lastGestureRecognized;
 
 /** Slides the content view out to the right to reveal the background view. */
 - (void)slideOutContentView;
