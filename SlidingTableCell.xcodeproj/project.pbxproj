@@ -34,7 +34,7 @@
 		A3D9A34B138EA2D100AFBA90 /* SlidingTableCellViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidingTableCellViewController.h; sourceTree = "<group>"; };
 		A3D9A34C138EA2D100AFBA90 /* SlidingTableCellViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlidingTableCellViewController.m; sourceTree = "<group>"; };
 		A3D9A34F138EA2D100AFBA90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SlidingTableCellViewController.xib; sourceTree = "<group>"; };
-		A3D9A356138EA40900AFBA90 /* LRSlidingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = LRSlidingTableViewCell.h; sourceTree = "<group>"; };
+		A3D9A356138EA40900AFBA90 /* LRSlidingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRSlidingTableViewCell.h; sourceTree = "<group>"; };
 		A3D9A357138EA40900AFBA90 /* LRSlidingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRSlidingTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,6 +52,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A3B5AE601399331100003CB2 /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				A3D9A34B138EA2D100AFBA90 /* SlidingTableCellViewController.h */,
+				A3D9A34C138EA2D100AFBA90 /* SlidingTableCellViewController.m */,
+				A3D9A34E138EA2D100AFBA90 /* SlidingTableCellViewController.xib */,
+				A3D9A33D138EA2D100AFBA90 /* Supporting Files */,
+				A3D9A345138EA2D100AFBA90 /* SlidingTableCellAppDelegate.h */,
+				A3D9A346138EA2D100AFBA90 /* SlidingTableCellAppDelegate.m */,
+				A3D9A348138EA2D100AFBA90 /* MainWindow.xib */,
+			);
+			name = Sample;
+			path = SlidingTableCell/Sample;
+			sourceTree = SOURCE_ROOT;
+		};
 		A3D9A327138EA2D100AFBA90 = {
 			isa = PBXGroup;
 			children = (
@@ -82,13 +97,7 @@
 		A3D9A33C138EA2D100AFBA90 /* SlidingTableCell */ = {
 			isa = PBXGroup;
 			children = (
-				A3D9A345138EA2D100AFBA90 /* SlidingTableCellAppDelegate.h */,
-				A3D9A346138EA2D100AFBA90 /* SlidingTableCellAppDelegate.m */,
-				A3D9A348138EA2D100AFBA90 /* MainWindow.xib */,
-				A3D9A34B138EA2D100AFBA90 /* SlidingTableCellViewController.h */,
-				A3D9A34C138EA2D100AFBA90 /* SlidingTableCellViewController.m */,
-				A3D9A34E138EA2D100AFBA90 /* SlidingTableCellViewController.xib */,
-				A3D9A33D138EA2D100AFBA90 /* Supporting Files */,
+				A3B5AE601399331100003CB2 /* Sample */,
 				A3D9A356138EA40900AFBA90 /* LRSlidingTableViewCell.h */,
 				A3D9A357138EA40900AFBA90 /* LRSlidingTableViewCell.m */,
 			);
@@ -245,8 +254,8 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SlidingTableCell/SlidingTableCell-Prefix.pch";
-				INFOPLIST_FILE = "SlidingTableCell/SlidingTableCell-Info.plist";
+				GCC_PREFIX_HEADER = "SlidingTableCell/Sample/SlidingTableCell-Prefix.pch";
+				INFOPLIST_FILE = "SlidingTableCell/Sample/SlidingTableCell-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -258,8 +267,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SlidingTableCell/SlidingTableCell-Prefix.pch";
-				INFOPLIST_FILE = "SlidingTableCell/SlidingTableCell-Info.plist";
+				GCC_PREFIX_HEADER = "SlidingTableCell/Sample/SlidingTableCell-Prefix.pch";
+				INFOPLIST_FILE = "SlidingTableCell/Sample/SlidingTableCell-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -285,6 +294,7 @@
 				A3D9A355138EA2D100AFBA90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
