@@ -11,11 +11,32 @@
 @implementation SlidingTableCellViewController
 
 @synthesize currentlyActiveSlidingCell;
+@synthesize swipeDirectionSegmentedControl;
+@synthesize swipeDirection;
 
 - (void)dealloc
 {
   [currentlyActiveSlidingCell release];
   [super dealloc];
+}
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  
+  self.navigationItem.prompt = @"Use the toolbar to change swipe direction";
+  
+  UIBarItem *controlItem = [[UIBarButtonItem alloc] initWithCustomView:self.swipeDirectionSegmentedControl];
+  [self setToolbarItems:[NSArray arrayWithObject:controlItem]];
+  [controlItem release];
+}
+
+- (IBAction)handleSegmentedControlSelection:(UISegmentedControl *)sender;
+{
+  self.swipeDirection = (LRSlidingTableViewCellSwipeDirection)sender.selectedSegmentIndex;
+  self.currentlyActiveSlidingCell = nil;
+
+  [self.tableView reloadData];
 }
 
 #pragma mark -
@@ -43,6 +64,7 @@
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
   cell.contentView.backgroundColor = [UIColor whiteColor];
   cell.textLabel.text = [NSString stringWithFormat:@"Cell %d", indexPath.row];
+  cell.swipeDirection = self.swipeDirection;
   cell.delegate = self;
   
   return cell;

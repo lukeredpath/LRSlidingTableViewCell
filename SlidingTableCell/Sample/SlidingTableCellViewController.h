@@ -10,7 +10,10 @@
 #import "LRSlidingTableViewCell.h"
 
 @interface SlidingTableCellViewController : UITableViewController <LRSlidingTableViewCellDelegate> {
-  LRSlidingTableViewCell *currentlyActiveSlidingCell;
 }
 @property (nonatomic, retain) LRSlidingTableViewCell *currentlyActiveSlidingCell;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *swipeDirectionSegmentedControl;
+@property (nonatomic, assign) LRSlidingTableViewCellSwipeDirection swipeDirection;
+
+- (IBAction)handleSegmentedControlSelection:(id)sender;
 @end
