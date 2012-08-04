@@ -27,7 +27,7 @@ typedef enum {
 
 @interface LRSlidingTableViewCell : UITableViewCell
 {
-	__weak id <LRSlidingTableViewCellDelegate> _delegate;
+	__unsafe_unretained id<LRSlidingTableViewCellDelegate> _delegate;
 	BOOL _backgroundViewVisible;
 	LRSlidingTableViewCellSwipeDirection _swipeDirection;
 	UISwipeGestureRecognizerDirection _lastRecognizedDirection;
