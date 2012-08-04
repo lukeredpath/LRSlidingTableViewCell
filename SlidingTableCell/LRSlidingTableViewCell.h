@@ -20,12 +20,9 @@ typedef enum {
 } LRSlidingTableViewCellSwipeDirection;
 
 @protocol LRSlidingTableViewCellDelegate <NSObject>
-
-- (void) slidingTableViewCellDidReceiveSwipe: (LRSlidingTableViewCell *) cell;
-
+- (void)slidingTableViewCellDidReceiveSwipe:(LRSlidingTableViewCell *)cell;
 @optional
-- (BOOL) slidingTableViewCellShouldSwipe: (LRSlidingTableViewCell *) cell;
-
+- (BOOL)slidingTableViewCellShouldSwipe:(LRSlidingTableViewCell *)cell;
 @end
 
 @interface LRSlidingTableViewCell : UITableViewCell
@@ -37,15 +34,15 @@ typedef enum {
 }
 
 @property (nonatomic) LRSlidingTableViewCellSwipeDirection swipeDirection;
-@property (nonatomic, weak) id <LRSlidingTableViewCellDelegate> delegate;
+@property (nonatomic, weak) id<LRSlidingTableViewCellDelegate> delegate;
 
 /** A Boolean indicator of whether the background view is visible. */
-- (BOOL) isBackgroundViewVisible;
+- (BOOL)isBackgroundViewVisible;
 
 /** Slides the content view out to the right or left to reveal the background view. */
-- (void) slideOutContentView: (UISwipeGestureRecognizerDirection) direction;
+- (void)slideOutContentView: (UISwipeGestureRecognizerDirection) direction;
 
 /** Slides the content view back in to cover the background view. */
-- (void) slideInContentView;
+- (void)slideInContentView;
 
 @end

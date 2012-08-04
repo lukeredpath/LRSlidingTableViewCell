@@ -13,9 +13,7 @@
 @interface LRSlidingTableViewCell ()
 
 @property (nonatomic) UISwipeGestureRecognizerDirection lastRecognizedDirection;
-
-- (void) addSwipeGestureRecognizer: (UISwipeGestureRecognizerDirection) direction;
-
+- (void)addSwipeGestureRecognizer:(UISwipeGestureRecognizerDirection)direction;
 @end
 
 @implementation LRSlidingTableViewCell
@@ -24,19 +22,18 @@
 @synthesize swipeDirection = _swipeDirection;
 @synthesize lastRecognizedDirection = _lastRecognizedDirection;
 
-- (BOOL) isBackgroundViewVisible
+- (BOOL)isBackgroundViewVisible
 {
 	return _backgroundViewVisible;
 }
 
-- (id) initWithStyle: (UITableViewCellStyle) style reuseIdentifier: (NSString *) reuseIdentifier
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
-	{
+	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
 		self.swipeDirection = LRSlidingTableViewCellSwipeDirectionRight;
 		self.lastRecognizedDirection = UISwipeGestureRecognizerDirectionRight;
-		
-		/** Add a default empty background view to make it clear that it's all working */
+        
+		// Add a default empty background view to make it clear that it's all working
 		UIView *defaultBackgroundView = [[UIView alloc] initWithFrame: self.contentView.frame];
 		defaultBackgroundView.backgroundColor = [UIColor darkGrayColor];
 		self.backgroundView = defaultBackgroundView;
@@ -44,25 +41,25 @@
 	
 	return self;
 }
-- (id) initWithCoder: (NSCoder *) decoder
+- (id)initWithCoder:(NSCoder *)decoder
 {
-	if ((self = [super initWithCoder: decoder]))
-	{
-		if (!self.swipeDirection) self.swipeDirection = LRSlidingTableViewCellSwipeDirectionRight;
-		if (!self.lastRecognizedDirection) self.lastRecognizedDirection = UISwipeGestureRecognizerDirectionRight;
+	if ((self = [super initWithCoder: decoder])) {
+		if (!self.swipeDirection)
+            self.swipeDirection = LRSlidingTableViewCellSwipeDirectionRight;
+		if (!self.lastRecognizedDirection)
+            self.lastRecognizedDirection = UISwipeGestureRecognizerDirectionRight;
 	}
-	
 	return self;
 }
 
-- (void) addSwipeGestureRecognizer: (UISwipeGestureRecognizerDirection) direction;
+- (void)addSwipeGestureRecognizer:(UISwipeGestureRecognizerDirection)direction;
 {
-	UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget: self action: @selector(handleSwipe:)];
+	UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
 	swipeGesture.direction = direction;
 	
 	[self addGestureRecognizer: swipeGesture];
 }
-- (void) handleSwipe: (UISwipeGestureRecognizer *) gesture
+- (void)handleSwipe:(UISwipeGestureRecognizer *) gesture
 {
 	if (_backgroundViewVisible)
 		return;
@@ -76,13 +73,13 @@
 	
 	[self slideOutContentView: gesture.direction];
 }
-- (void) layoutSubviews
+- (void)layoutSubviews
 {
 	[super layoutSubviews];
 	
 	self.contentView.frame = self.bounds;
 }
-- (void) setSwipeDirection: (LRSlidingTableViewCellSwipeDirection) direction
+- (void)setSwipeDirection:(LRSlidingTableViewCellSwipeDirection) direction
 {
 	if (_swipeDirection == direction)
 		return;
@@ -124,7 +121,7 @@ void LR_offsetView(UIView *view, CGFloat offsetX, CGFloat offsetY)
 	view.frame = CGRectOffset(view.frame, offsetX, offsetY);
 }
 
-- (void) slideInContentView
+- (void)slideInContentView
 {
 	if (!_backgroundViewVisible)
 		return;
