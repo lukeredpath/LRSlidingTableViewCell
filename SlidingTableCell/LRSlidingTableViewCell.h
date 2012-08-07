@@ -26,15 +26,10 @@ typedef enum {
 @end
 
 @interface LRSlidingTableViewCell : UITableViewCell
-{
-	__unsafe_unretained id<LRSlidingTableViewCellDelegate> _delegate;
-	BOOL _backgroundViewVisible;
-	LRSlidingTableViewCellSwipeDirection _swipeDirection;
-	UISwipeGestureRecognizerDirection _lastRecognizedDirection;
-}
 
 @property (nonatomic) LRSlidingTableViewCellSwipeDirection swipeDirection;
 @property (nonatomic, weak) id<LRSlidingTableViewCellDelegate> delegate;
+@property (nonatomic, getter = isBackgroundViewVisible) BOOL backgroundViewVisible;
 
 /** A Boolean indicator of whether the background view is visible. */
 - (BOOL)isBackgroundViewVisible;

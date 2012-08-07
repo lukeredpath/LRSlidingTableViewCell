@@ -21,11 +21,7 @@
 @synthesize delegate = _delegate;
 @synthesize swipeDirection = _swipeDirection;
 @synthesize lastRecognizedDirection = _lastRecognizedDirection;
-
-- (BOOL)isBackgroundViewVisible
-{
-	return _backgroundViewVisible;
-}
+@synthesize backgroundViewVisible = _backgroundViewVisible;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
