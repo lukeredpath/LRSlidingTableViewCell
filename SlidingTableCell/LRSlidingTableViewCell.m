@@ -39,7 +39,7 @@
 }
 - (id)initWithCoder:(NSCoder *)decoder
 {
-	if ((self = [super initWithCoder: decoder])) {
+	if ((self = [super initWithCoder:decoder])) {
 		if (!self.swipeDirection)
             self.swipeDirection = LRSlidingTableViewCellSwipeDirectionRight;
 		if (!self.lastRecognizedDirection)
@@ -53,7 +53,7 @@
 	UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
 	swipeGesture.direction = direction;
 	
-	[self addGestureRecognizer: swipeGesture];
+	[self addGestureRecognizer:swipeGesture];
 }
 - (void)handleSwipe:(UISwipeGestureRecognizer *) gesture
 {
