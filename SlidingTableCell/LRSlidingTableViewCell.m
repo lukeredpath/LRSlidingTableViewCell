@@ -34,7 +34,7 @@
 		self.lastRecognizedDirection = UISwipeGestureRecognizerDirectionRight;
         
 		// Add a default empty background view to make it clear that it's all working
-		UIView *defaultBackgroundView = [[UIView alloc] initWithFrame: self.contentView.frame];
+		UIView *defaultBackgroundView = [[UIView alloc] initWithFrame:self.contentView.frame];
 		defaultBackgroundView.backgroundColor = [UIColor darkGrayColor];
 		self.backgroundView = defaultBackgroundView;
 	}
@@ -65,8 +65,8 @@
 		return;
 	
 	BOOL canSwipe = YES;
-	if (self.delegate && [self.delegate respondsToSelector: @selector(slidingTableViewCellShouldSwipe:)])
-		canSwipe = [self.delegate slidingTableViewCellShouldSwipe: self];
+	if (self.delegate && [self.delegate respondsToSelector:@selector(slidingTableViewCellShouldSwipe:)])
+		canSwipe = [self.delegate slidingTableViewCellShouldSwipe:self];
 	
 	if (!canSwipe)
 		return;
@@ -88,22 +88,22 @@
 	
 	NSArray *existingGestures = [self gestureRecognizers];
 	[existingGestures enumerateObjectsUsingBlock: ^(UIGestureRecognizer *gesture, NSUInteger idx, BOOL *stop) {
-		[self removeGestureRecognizer: gesture];
+		[self removeGestureRecognizer:gesture];
 	}];
 	
 	switch (_swipeDirection)
 	{
 		case LRSlidingTableViewCellSwipeDirectionLeft:
-			[self addSwipeGestureRecognizer: UISwipeGestureRecognizerDirectionLeft];
+			[self addSwipeGestureRecognizer:UISwipeGestureRecognizerDirectionLeft];
 			break;
 			
 		case LRSlidingTableViewCellSwipeDirectionRight:
-			[self addSwipeGestureRecognizer: UISwipeGestureRecognizerDirectionRight];
+			[self addSwipeGestureRecognizer:UISwipeGestureRecognizerDirectionRight];
 			break;
 			
 		case LRSlidingTableViewCellSwipeDirectionBoth:
-			[self addSwipeGestureRecognizer: UISwipeGestureRecognizerDirectionLeft];
-			[self addSwipeGestureRecognizer: UISwipeGestureRecognizerDirectionRight];
+			[self addSwipeGestureRecognizer:UISwipeGestureRecognizerDirectionLeft];
+			[self addSwipeGestureRecognizer:UISwipeGestureRecognizerDirectionRight];
 			break;
 			
 		default:
