@@ -29,7 +29,6 @@ typedef enum {
 
 @property (nonatomic) LRSlidingTableViewCellSwipeDirection swipeDirection;
 @property (nonatomic, assign) id<LRSlidingTableViewCellDelegate> delegate;
-@property (nonatomic, getter = isBackgroundViewVisible) BOOL backgroundViewVisible;
 
 /** A Boolean indicator of whether the background view is visible. */
 - (BOOL)isBackgroundViewVisible;

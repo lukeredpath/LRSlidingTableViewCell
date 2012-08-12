@@ -21,7 +21,6 @@
 @synthesize delegate = _delegate;
 @synthesize swipeDirection = _swipeDirection;
 @synthesize lastRecognizedDirection = _lastRecognizedDirection;
-@synthesize backgroundViewVisible = _backgroundViewVisible;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -30,13 +29,16 @@
 		self.lastRecognizedDirection = UISwipeGestureRecognizerDirectionRight;
         
 		// Add a default empty background view to make it clear that it's all working
-		UIView *defaultBackgroundView = [[UIView alloc] initWithFrame:self.contentView.frame];
-		defaultBackgroundView.backgroundColor = [UIColor darkGrayColor];
-		self.backgroundView = defaultBackgroundView;
+		self.backgroundView = [[UIView alloc] initWithFrame:self.contentView.frame];
+		self.backgroundView.backgroundColor = [UIColor darkGrayColor];
+        
+        // Set the backgroundView to hidden. This stops it from displaying behind selections.
+        self.backgroundView.hidden = YES;
 	}
 	
 	return self;
 }
+
 - (id)initWithCoder:(NSCoder *)decoder
 {
 	if ((self = [super initWithCoder:decoder])) {
@@ -48,6 +50,11 @@
 	return self;
 }
 
+- (BOOL)isBackgroundViewVisible
+{
+    return !self.backgroundView.hidden;
+}
+
 - (void)addSwipeGestureRecognizer:(UISwipeGestureRecognizerDirection)direction;
 {
 	UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
@@ -55,9 +62,10 @@
 	
 	[self addGestureRecognizer:swipeGesture];
 }
-- (void)handleSwipe:(UISwipeGestureRecognizer *) gesture
+
+- (void)handleSwipe:(UISwipeGestureRecognizer *)gesture
 {
-	if (_backgroundViewVisible)
+	if (!self.backgroundView.hidden)
 		return;
 	
 	BOOL canSwipe = YES;
@@ -67,15 +75,17 @@
 	if (!canSwipe)
 		return;
 	
-	[self slideOutContentView: gesture.direction];
+	[self slideOutContentView:gesture.direction];
 }
+
 - (void)layoutSubviews
 {
 	[super layoutSubviews];
 	
 	self.contentView.frame = self.bounds;
 }
-- (void)setSwipeDirection:(LRSlidingTableViewCellSwipeDirection) direction
+
+- (void)setSwipeDirection:(LRSlidingTableViewCellSwipeDirection)direction
 {
 	if (_swipeDirection == direction)
 		return;
@@ -119,7 +129,7 @@ void LR_offsetView(UIView *view, CGFloat offsetX, CGFloat offsetY)
 
 - (void)slideInContentView
 {
-	if (!_backgroundViewVisible)
+	if (self.backgroundView.hidden)
 		return;
 	
 	CGFloat offsetX, bounceDistance;
@@ -137,29 +147,32 @@ void LR_offsetView(UIView *view, CGFloat offsetX, CGFloat offsetY)
 			break;
 			
 		default:
-			@throw [NSException exceptionWithName: NSInternalInconsistencyException reason: @"Unhandled gesture direction" userInfo: [NSDictionary dictionaryWithObject: [NSNumber numberWithInt: self.lastRecognizedDirection] forKey: @"lastRecognizedDirection"]];
+			@throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Unhandled gesture direction" userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt: self.lastRecognizedDirection] forKey:@"lastRecognizedDirection"]];
 			break;
 	}
 	
-	[UIView animateWithDuration: 0.1 delay: 0 options: (UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction) animations: ^{
+	[UIView animateWithDuration:0.1 delay:0 options:(UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction) animations: ^{
 		LR_offsetView(self.contentView, offsetX, 0);
-	} completion: ^(BOOL finished) {
-		 [UIView animateWithDuration: 0.1 delay: 0 options: UIViewAnimationCurveLinear animations: ^{
+	} completion:^(BOOL finished) {
+		 [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationCurveLinear animations: ^{
 			 LR_offsetView(self.contentView, bounceDistance, 0);
-		 } completion: ^(BOOL finished) {
-			 [UIView animateWithDuration: 0.1 delay: 0 options: UIViewAnimationCurveLinear animations: ^{
+		 } completion:^(BOOL finished) {
+			 [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationCurveLinear animations: ^{
 				 LR_offsetView(self.contentView, -bounceDistance, 0);
-			 } completion: ^(BOOL finished) {
-				 _backgroundViewVisible = NO;
+			 } completion:^(BOOL finished) {
+				 self.backgroundView.hidden = YES;
 			 }];
 		 }];
 	}];
 }
+
 - (void)slideOutContentView:(UISwipeGestureRecognizerDirection)direction
 {
-	if (_backgroundViewVisible)
+	if (!self.backgroundView.hidden)
 		return;
 	
+    self.backgroundView.hidden = NO;
+    
 	self.lastRecognizedDirection = direction;
 	
 	CGFloat offsetX;
@@ -175,14 +188,13 @@ void LR_offsetView(UIView *view, CGFloat offsetX, CGFloat offsetY)
 			break;
 			
 		default:
-			@throw [NSException exceptionWithName: NSInternalInconsistencyException reason: @"Unhandled gesture direction" userInfo: [NSDictionary dictionaryWithObject: [NSNumber numberWithInt: self.lastRecognizedDirection] forKey: @"lastRecognizedDirection"]];
+			@throw [NSException exceptionWithName: NSInternalInconsistencyException reason:@"Unhandled gesture direction" userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:self.lastRecognizedDirection] forKey:@"lastRecognizedDirection"]];
 			break;
 	}
 
-	[UIView animateWithDuration: 0.2 delay: 0 options: UIViewAnimationOptionCurveEaseOut animations: ^{
+	[UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations: ^{
 		LR_offsetView(self.contentView, offsetX, 0);
 	} completion: ^(BOOL finished) {
-		_backgroundViewVisible = YES;
 		[self.delegate slidingTableViewCellDidReceiveSwipe: self];
 	}];
 }
