@@ -73,7 +73,7 @@
 		canSwipe = [self.delegate slidingTableViewCellShouldSwipe:self];
     
     // If we are animating deselection don't allow a swipe - this introduces a bug
-    if (self.selectedBackgroundView.alpha < 1.0)
+    if (self.selectedBackgroundView.alpha != 1.0 && self.selectedBackgroundView.alpha != 0.0)
         canSwipe = NO;
 	
 	if (!canSwipe)
