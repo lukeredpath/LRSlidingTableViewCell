@@ -155,7 +155,7 @@ void LR_offsetView(UIView *view, CGFloat offsetX, CGFloat offsetY)
 		 }];
 	}];
 }
-- (void) slideOutContentView: (UISwipeGestureRecognizerDirection) direction
+- (void)slideOutContentView:(UISwipeGestureRecognizerDirection)direction
 {
 	if (_backgroundViewVisible)
 		return;
