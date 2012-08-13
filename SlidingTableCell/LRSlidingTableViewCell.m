@@ -14,7 +14,6 @@
 @property (nonatomic, getter = isBackgroundViewVisible) BOOL backgroundViewVisible;
 @property (nonatomic, getter = isSelectionAnimating) BOOL selectionAnimating;
 @property (nonatomic) UISwipeGestureRecognizerDirection lastRecognizedDirection;
-@property (nonatomic) UITableViewCellSelectionStyle userSelectionStyle;
 - (void)addSwipeGestureRecognizer:(UISwipeGestureRecognizerDirection)direction;
 @end
 
@@ -77,12 +76,6 @@
     _backgroundViewVisible = backgroundViewVisible;
     // Ensure the backgroundView doesn't appear behind selections
     self.backgroundView.hidden = !backgroundViewVisible;
-    // Prevent selection while visible
-    if (backgroundViewVisible) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-    } else {
-        self.selectionStyle = self.userSelectionStyle;
-    }
 }
 
 - (void)addSwipeGestureRecognizer:(UISwipeGestureRecognizerDirection)direction;
@@ -104,13 +97,10 @@
     
     if (self.selectionAnimating)
         canSwipe = NO;
-    
-    if (self.selected)
-        canSwipe = NO;
     	
 	if (!canSwipe)
 		return;
-	
+    
 	[self slideOutContentView:gesture.direction];
 }
 
@@ -212,11 +202,14 @@ void LR_offsetView(UIView *view, CGFloat offsetX, CGFloat offsetY)
 	if (self.backgroundViewVisible)
 		return;
     
+    // Deselect the cell if it's selected
+    [self setSelected:NO animated:NO];
+    
     // Show the background view
     self.backgroundViewVisible = YES;
 
 	self.lastRecognizedDirection = direction;
-	
+    	
 	CGFloat offsetX;
 	
 	switch (direction)
