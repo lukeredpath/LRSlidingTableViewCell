@@ -104,6 +104,9 @@
     
     if (self.selectionAnimating)
         canSwipe = NO;
+    
+    if (self.selected)
+        canSwipe = NO;
     	
 	if (!canSwipe)
 		return;
@@ -206,7 +209,7 @@ void LR_offsetView(UIView *view, CGFloat offsetX, CGFloat offsetY)
 
 - (void)slideOutContentView:(UISwipeGestureRecognizerDirection)direction
 {
-	if (self.backgroundViewVisible || self.selected)
+	if (self.backgroundViewVisible)
 		return;
     
     // Show the background view
