@@ -34,9 +34,6 @@
 		self.backgroundView = [[UIView alloc] initWithFrame:self.contentView.frame];
 		self.backgroundView.backgroundColor = [UIColor darkGrayColor];
         
-        // Keep track of the selection style
-        self.userSelectionStyle = style;
-        
         // Set our backgroundView to be hidden
         self.backgroundViewVisible = NO;
     }
@@ -108,8 +105,7 @@
 	[super layoutSubviews];
 	
     if (self.backgroundViewVisible) {
-        CGFloat offsetX = self.contentView.frame.size.width;
-        LR_offsetView(self.contentView, offsetX, 0);
+        [self slideInContentViewAnimated:NO];
     } else {
         self.contentView.frame = self.bounds;
     }
@@ -159,6 +155,11 @@ void LR_offsetView(UIView *view, CGFloat offsetX, CGFloat offsetY)
 
 - (void)slideInContentView
 {
+    [self slideInContentViewAnimated:YES];
+}
+
+- (void)slideInContentViewAnimated:(BOOL)animated
+{
 	if (!self.backgroundViewVisible)
 		return;
 	
@@ -181,6 +182,11 @@ void LR_offsetView(UIView *view, CGFloat offsetX, CGFloat offsetY)
 			break;
 	}
 	
+    if (!animated) {
+        LR_offsetView(self.contentView, offsetX, 0);
+        return;
+    }
+    
 	[UIView animateWithDuration:0.1 delay:0 options:(UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction) animations: ^{
 		LR_offsetView(self.contentView, offsetX, 0);
 	} completion:^(BOOL finished) {
