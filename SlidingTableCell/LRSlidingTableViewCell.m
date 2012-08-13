@@ -11,13 +11,17 @@
 #import "LRSlidingTableViewCell.h"
 
 @interface LRSlidingTableViewCell ()
-
+@property (nonatomic, getter = isBackgroundViewVisible) BOOL backgroundViewVisible;
+@property (nonatomic, getter = isSelectionAnimating) BOOL selectionAnimating;
 @property (nonatomic) UISwipeGestureRecognizerDirection lastRecognizedDirection;
+@property (nonatomic) UITableViewCellSelectionStyle userSelectionStyle;
 - (void)addSwipeGestureRecognizer:(UISwipeGestureRecognizerDirection)direction;
 @end
 
 @implementation LRSlidingTableViewCell
 
+@synthesize userSelectionStyle = _userSelectionStyle;
+@synthesize selectionAnimating = _selectionAnimating;
 @synthesize delegate = _delegate;
 @synthesize swipeDirection = _swipeDirection;
 @synthesize lastRecognizedDirection = _lastRecognizedDirection;
@@ -32,9 +36,12 @@
 		self.backgroundView = [[UIView alloc] initWithFrame:self.contentView.frame];
 		self.backgroundView.backgroundColor = [UIColor darkGrayColor];
         
-        // Set the backgroundView to hidden. This stops it from displaying behind selections.
-        self.backgroundView.hidden = YES;
-	}
+        // Keep track of the selection style
+        self.userSelectionStyle = style;
+        
+        // Set our backgroundView to be hidden
+        self.backgroundViewVisible = NO;
+    }
 	
 	return self;
 }
@@ -50,9 +57,32 @@
 	return self;
 }
 
-- (BOOL)isBackgroundViewVisible
+- (void)selectionStoppedAnimating
 {
-    return !self.backgroundView.hidden;
+    self.selectionAnimating = NO;
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+    if (animated) {
+        self.selectionAnimating = YES;
+        // Hard coded selection animation delay
+        [self performSelector:@selector(selectionStoppedAnimating) withObject:nil afterDelay:0.5];
+    }
+}
+
+- (void)setBackgroundViewVisible:(BOOL)backgroundViewVisible
+{
+    _backgroundViewVisible = backgroundViewVisible;
+    // Ensure the backgroundView doesn't appear behind selections
+    self.backgroundView.hidden = !backgroundViewVisible;
+    // Prevent selection while visible
+    if (backgroundViewVisible) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+    } else {
+        self.selectionStyle = self.userSelectionStyle;
+    }
 }
 
 - (void)addSwipeGestureRecognizer:(UISwipeGestureRecognizerDirection)direction;
@@ -72,10 +102,9 @@
 	if (self.delegate && [self.delegate respondsToSelector:@selector(slidingTableViewCellShouldSwipe:)])
 		canSwipe = [self.delegate slidingTableViewCellShouldSwipe:self];
     
-    // If we are animating deselection don't allow a swipe - this introduces a bug
-    if (self.selectedBackgroundView.alpha != 1.0 && self.selectedBackgroundView.alpha != 0.0)
+    if (self.selectionAnimating)
         canSwipe = NO;
-	
+    	
 	if (!canSwipe)
 		return;
 	
@@ -86,7 +115,12 @@
 {
 	[super layoutSubviews];
 	
-	self.contentView.frame = self.bounds;
+    if (self.backgroundViewVisible) {
+        CGFloat offsetX = self.contentView.frame.size.width;
+        LR_offsetView(self.contentView, offsetX, 0);
+    } else {
+        self.contentView.frame = self.bounds;
+    }
 }
 
 - (void)setSwipeDirection:(LRSlidingTableViewCellSwipeDirection)direction
@@ -133,7 +167,7 @@ void LR_offsetView(UIView *view, CGFloat offsetX, CGFloat offsetY)
 
 - (void)slideInContentView
 {
-	if (self.backgroundView.hidden)
+	if (!self.backgroundViewVisible)
 		return;
 	
 	CGFloat offsetX, bounceDistance;
@@ -164,7 +198,7 @@ void LR_offsetView(UIView *view, CGFloat offsetX, CGFloat offsetY)
 			 [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationCurveLinear animations: ^{
 				 LR_offsetView(self.contentView, -bounceDistance, 0);
 			 } completion:^(BOOL finished) {
-				 self.backgroundView.hidden = YES;
+				 self.backgroundViewVisible = NO;
 			 }];
 		 }];
 	}];
@@ -172,11 +206,12 @@ void LR_offsetView(UIView *view, CGFloat offsetX, CGFloat offsetY)
 
 - (void)slideOutContentView:(UISwipeGestureRecognizerDirection)direction
 {
-	if (!self.backgroundView.hidden)
+	if (self.backgroundViewVisible || self.selected)
 		return;
-	
-    self.backgroundView.hidden = NO;
     
+    // Show the background view
+    self.backgroundViewVisible = YES;
+
 	self.lastRecognizedDirection = direction;
 	
 	CGFloat offsetX;
@@ -199,7 +234,7 @@ void LR_offsetView(UIView *view, CGFloat offsetX, CGFloat offsetY)
 	[UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations: ^{
 		LR_offsetView(self.contentView, offsetX, 0);
 	} completion: ^(BOOL finished) {
-		[self.delegate slidingTableViewCellDidReceiveSwipe: self];
+		[self.delegate slidingTableViewCellDidReceiveSwipe:self];
 	}];
 }
 
