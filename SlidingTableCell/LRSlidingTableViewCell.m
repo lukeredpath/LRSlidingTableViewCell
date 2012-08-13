@@ -19,7 +19,6 @@
 
 @implementation LRSlidingTableViewCell
 
-@synthesize userSelectionStyle = _userSelectionStyle;
 @synthesize selectionAnimating = _selectionAnimating;
 @synthesize delegate = _delegate;
 @synthesize swipeDirection = _swipeDirection;
