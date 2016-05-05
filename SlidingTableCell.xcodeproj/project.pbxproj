@@ -16,7 +16,7 @@
 		A3D9A34A138EA2D100AFBA90 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D9A348138EA2D100AFBA90 /* MainWindow.xib */; };
 		A3D9A34D138EA2D100AFBA90 /* SlidingTableCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D9A34C138EA2D100AFBA90 /* SlidingTableCellViewController.m */; };
 		A3D9A350138EA2D100AFBA90 /* SlidingTableCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D9A34E138EA2D100AFBA90 /* SlidingTableCellViewController.xib */; };
-		A3D9A358138EA40900AFBA90 /* LRSlidingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D9A357138EA40900AFBA90 /* LRSlidingTableViewCell.m */; };
+		A3D9A358138EA40900AFBA90 /* LRSlidingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D9A357138EA40900AFBA90 /* LRSlidingTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,9 +43,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3D9A337138EA2D100AFBA90 /* UIKit.framework in Frameworks */,
-				A3D9A339138EA2D100AFBA90 /* Foundation.framework in Frameworks */,
 				A3D9A33B138EA2D100AFBA90 /* CoreGraphics.framework in Frameworks */,
+				A3D9A339138EA2D100AFBA90 /* Foundation.framework in Frameworks */,
+				A3D9A337138EA2D100AFBA90 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +141,7 @@
 		A3D9A329138EA2D100AFBA90 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "LJR Software Limited";
 			};
 			buildConfigurationList = A3D9A32C138EA2D100AFBA90 /* Build configuration list for PBXProject "SlidingTableCell" */;
@@ -227,7 +228,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -241,7 +242,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 			};
@@ -255,6 +256,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SlidingTableCell/Sample/SlidingTableCell-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "SlidingTableCell/Sample/SlidingTableCell-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -268,6 +270,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SlidingTableCell/Sample/SlidingTableCell-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "SlidingTableCell/Sample/SlidingTableCell-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
