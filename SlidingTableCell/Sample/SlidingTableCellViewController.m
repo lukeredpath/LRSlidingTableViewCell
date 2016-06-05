@@ -75,7 +75,7 @@
  *  This allows us to slide the cell's content back in again if the user
  *  starts dragging the table view or swipes a different cell. 
  */
-- (void)cellDidReceiveSwipe:(LRSlidingTableViewCell *)cell
+- (void)slidingTableViewCellDidReceiveSwipe:(LRSlidingTableViewCell *)cell
 {
   self.currentlyActiveSlidingCell = cell;
 }
